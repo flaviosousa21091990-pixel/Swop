@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SW Rune Optimizer - Versão GitHub</title>
+    <style>
+        :root { --bg-dark: #121214; --bg-card: #202024; --primary: #04d361; --text: #e1e1e6; --border: #323238; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; background-color: var(--bg-dark); color: var(--text); margin: 0; padding: 20px; }
+        .container { max-width: 1200px; margin: 0 auto; }
+        h1, h2 { color: var(--primary); }
+        .card { background-color: var(--bg-card); padding: 20px; border-radius: 8px; border: 1px solid var(--border); margin-bottom: 20px; }
+        label { display: block; margin-top: 10px; font-weight: bold; }
+        input, select, button { width: 100%; max-width: 300px; padding: 10px; margin-top: 5px; background: #121214; color: var(--text); border: 1px solid var(--border); border-radius: 4px; font-size: 14px; box-sizing: border-box; }
+        button { background-color: var(--primary); color: #000; font-weight: bold; cursor: pointer; transition: background 0.2s; }
+        button:hover { background-color: #00b34d; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { padding: 12px; border: 1px solid var(--border); text-align: left; }
+        th { background-color: #121214; color: var(--primary); }
+        tr:nth-child(even) { background-color: #29292e; }
+        .status { color: #8257e5; font-weight: bold; margin-top: 10px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Summoners War Optimizer - Custom GitHub</h1>
+        
+        <!-- Bloco 1: Importação de ficheiro SWEX -->
+        <div class="card">
+            <h2>1. Importar JSON (.json)</h2>
+            <input type="file" id="jsonInput" accept=".json">
+            <div id="importStatus" class="status">Nenhum ficheiro carregado.</div>
+        </div>
+
+        <!-- Bloco 2: Parâmetros do Algoritmo -->
+        <div class="card">
+            <h2>2. Configurações do Monstro</h2>
+            <label for="monsterSelect">Selecionar Monstro:</label>
+            <select id="monsterSelect" disabled><option>Carregue o ficheiro JSON primeiro...</option></select>
+
+            <label for="setFilter">Conjunto Obrigatório (Set 1):</label>
+            <select id="setFilter">
+                <option value="ANY">Qualquer Um (Broken Sets)</option>
+                <option value="Swift">Swift</option>
+                <option value="Violent">Violent</option>
+                <option value="Will">Will</option>
+                <option value="Fatal">Fatal</option>
+                <option value="Blade">Blade</option>
+            </select>
+
+            <label for="minSpd">Velocidade Adicional Mínima (+SPD):</label>
+            <input type="number" id="minSpd" value="0" min="0">
+
+            <label for="minCrit">Taxa Crítica Mínima (CR%):</label>
+            <input type="number" id="minCrit" value="15" min="15" max="100">
+
+            <br><br>
+            <button id="optimizeBtn" disabled>Executar Otimização Avançada</button>
+        </div>
+
+        <!-- Bloco 3: Tabela de Resultados -->
+        <div class="card">
+            <h2>3. Combinações Otimizadas</h2>
+            <div id="calcStatus" class="status">Aguardando execução...</div>
+            <div style="overflow-x: auto;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Sets Ativos</th>
+                            <th>+HP Total</th>
+                            <th>+ATK Total</th>
+                            <th>+DEF Total</th>
+                            <th>+SPD Total</th>
+                            <th>Taxa Crítica (CR)</th>
+                        </tr>
+                    </thead>
+                    <tbody id="resultsBody">
+                        <tr><td colspan="6" style="text-align: center; color: #7c7c8a;">Sem dados para exibir.</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
